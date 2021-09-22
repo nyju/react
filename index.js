@@ -2,8 +2,9 @@ const express = require('express')
 const app = express()
 const port = 5000
 const bodyParser = require('body-parser');
-const {User} = require("./models/User");
 
+const {User} = require("./models/User");
+const config = require('./config/key');
 
 // application/x-www-form-urlencoded 타입을 분석해서 가져옴
 app.use(bodyParser.urlencoded({extended:true}));
@@ -13,14 +14,14 @@ app.use(bodyParser.json());
 
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://ny:ny123@cluster0.kftgg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+mongoose.connect(config.mongoURL
 ).then(() => console.log("MongoDB Connected"))
  .catch(err => console.log(err))
 
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World! 안녕하세요')
+  res.send('Hello World! 안녕하세요!!')
 })
 
 app.post('/register', (req, res) => {
